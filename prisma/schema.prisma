@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  username      String         @id
+  password      String
+  firstName     String
+  lastName      String
+  email         String         @unique
+  phoneNumber   String         @unique
+  dateCreated   DateTime       @default(now())
+  leaveBalance  Int
+  leaveRequests LeaveRequest[]
+  documents     Document[]
+  tickets       Ticket[]
+  messages      Message[]
+  role          String         @default("EMPLOYEE")
+}
+
+model LeaveRequest {
+  id            Int       @id @default(autoincrement())
+  reason        String
+  startDate     DateTime
+  endDate       DateTime
+  requestStatus String    @default("Pending")
+  dateCreated   DateTime  @default(now())
+  dateResponded DateTime?
+  User          User      @relation(fields: [userUsername], references: [username], onDelete: Cascade)
+  userUsername  String
+}
+
+model Document {
+  id           Int      @id @default(autoincrement())
+  filename     String
+  data         Bytes
+  dateCreated  DateTime @default(now())
+  User         User     @relation(fields: [userUsername], references: [username], onDelete: Cascade)
+  userUsername String
+}
+
+model Announcement {
+  id          Int      @id @default(autoincrement())
+  title       String
+  text        String
+  dateCreated DateTime @default(now())
+  role        String
+}
+
+model Ticket {
+  id           Int       @id @default(autoincrement())
+  subject      String
+  status       String    @default("Unresolved")
+  messages     Message[]
+  dateCreated  DateTime  @default(now())
+  User         User      @relation(fields: [userUsername], references: [username], onDelete: Cascade)
+  userUsername String
+}
+
+model Message {
+  id           Int      @id @default(autoincrement())
+  Ticket       Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  ticketId     Int
+  text         String
+  dateCreated  DateTime @default(now())
+  User         User     @relation(fields: [userUsername], references: [username], onDelete: Cascade)
+  userUsername String
+}

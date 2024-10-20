@@ -1,0 +1,14 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    --bg-primary: 30 30 30;
+    --primary: 197 255 0;
+  }
+}
+
+#__next {
+  overflow-y: hidden;
+}
