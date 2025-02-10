@@ -10,6 +10,7 @@ import axios from "axios";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
+import { useEffect } from "react";
 
 type Props = {
   user: User | null;
@@ -27,6 +28,22 @@ export default function PersonalInfo({ user }: Props) {
 
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState(<></>);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setEmail(user.email);
+      setPhoneNumber(user.phoneNumber);
+      setLoading(false);
+    }
+  }, [user]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   // Handle Update Info button click
   const handleUpdate = async () => {

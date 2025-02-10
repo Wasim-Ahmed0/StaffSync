@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prisma";
+import { useEffect, useState } from "react";
 
 type Props = {
   user: User;
@@ -14,6 +15,17 @@ type Props = {
 
 export default function Settings({ user }: Props) {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      setLoading(false);
+    }
+  }, [user]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const handleSignOut = async () => {
     const data = await signOut({ redirect: false, callbackUrl: "/" });
