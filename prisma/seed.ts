@@ -91,21 +91,6 @@ async function main() {
     },
   });
 
-  const technician = await prisma.user.upsert({
-    where: { username: "technician" },
-    update: {},
-    create: {
-      username: "technician",
-      password: await argon2.hash("password"),
-      firstName: "Test3",
-      lastName: "Test3",
-      email: "test333@example.com",
-      phoneNumber: "1112",
-      leaveBalance: 0,
-      role: "TECHNICIAN",
-    },
-  });
-
   const testA = await prisma.user.upsert({
     where: { username: "testA" },
     update: {},
@@ -131,36 +116,6 @@ async function main() {
       lastName: "testB",
       email: "test33333@example.com",
       phoneNumber: "1123",
-      leaveBalance: 0,
-      role: "TECHNICIAN",
-    },
-  });
-
-  const testC = await prisma.user.upsert({
-    where: { username: "testC" },
-    update: {},
-    create: {
-      username: "testC",
-      password: await argon2.hash("password"),
-      firstName: "testC",
-      lastName: "testC",
-      email: "test333333@example.com",
-      phoneNumber: "1124",
-      leaveBalance: 0,
-      role: "TECHNICIAN",
-    },
-  });
-
-  const testD = await prisma.user.upsert({
-    where: { username: "testD" },
-    update: {},
-    create: {
-      username: "testD",
-      password: await argon2.hash("password"),
-      firstName: "testD",
-      lastName: "testD",
-      email: "test3333333@example.com",
-      phoneNumber: "1125",
       leaveBalance: 0,
       role: "TECHNICIAN",
     },
