@@ -55,11 +55,11 @@ This project is **already deployed** at [staff-sync-chi.vercel.app](https://staf
 
 ### 🔑 **Environment Variables**
 To run this project locally, you need a `.env` file with the following variables:
-
+```bash
 DATABASE_URL="your_postgresql_connection_string" 
 NEXTAUTH_SECRET="your_randomly_generated_secret"
 NEXTAUTH_URL="http://localhost:3000"
-
+```
 ⚠ **Note:** The database is hosted on **Neon.tech**, so you will need to:
 1. **Set up your own PostgreSQL database** and replace `DATABASE_URL` with your own.
 2. **Use a local SQLite database** *(not recommended for production)*.
