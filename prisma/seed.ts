@@ -4,44 +4,44 @@ import argon2 from "argon2";
 const prisma = new PrismaClient();
 
 async function main() {
-  const test = await prisma.user.upsert({
-    where: { username: "test" },
+  const emp1 = await prisma.user.upsert({
+    where: { username: "employee1" },
     update: {},
     create: {
-      username: "test",
+      username: "employee1",
       password: await argon2.hash("password"),
-      firstName: "TestNormal",
-      lastName: "Test",
-      email: "test@example.com",
+      firstName: "Jeff",
+      lastName: "Bezos",
+      email: "employee1@example.com",
       dateCreated: new Date(2024, 2, 17, 18, 25, 22, 0),
-      phoneNumber: "1",
+      phoneNumber: "3",
       leaveBalance: 0,
       tickets: {
         create: {
           subject: "test",
           messages: {
-            create: [{ userUsername: "test", text: "test" }],
+            create: [{ userUsername: "employee1", text: "test text written by employee1" }],
           },
         },
       },
     },
   });
-  const test2 = await prisma.user.upsert({
-    where: { username: "test2" },
+  const emp2 = await prisma.user.upsert({
+    where: { username: "employee2" },
     update: {},
     create: {
-      username: "test2",
+      username: "employee2",
       password: await argon2.hash("password"),
-      firstName: "Test2",
-      lastName: "Test2",
-      email: "test3@example.com",
+      firstName: "Bill",
+      lastName: "Gates",
+      email: "employee2@example.com",
       phoneNumber: "2",
       leaveBalance: 10,
       tickets: {
         create: {
           subject: "test2",
           messages: {
-            create: [{ userUsername: "test2", text: "test2" }],
+            create: [{ userUsername: "employee2", text: "test text written by employee2" }],
           },
         },
       },
@@ -92,13 +92,13 @@ async function main() {
   });
 
   const testA = await prisma.user.upsert({
-    where: { username: "testA" },
+    where: { username: "tech1" },
     update: {},
     create: {
-      username: "testA",
+      username: "tech1",
       password: await argon2.hash("password"),
-      firstName: "testA",
-      lastName: "testA",
+      firstName: "Tech",
+      lastName: "Guy",
       email: "test3333@example.com",
       phoneNumber: "1122",
       leaveBalance: 0,
@@ -107,13 +107,13 @@ async function main() {
   });
 
   const testB = await prisma.user.upsert({
-    where: { username: "testB" },
+    where: { username: "tech2" },
     update: {},
     create: {
-      username: "testB",
+      username: "tech2",
       password: await argon2.hash("password"),
-      firstName: "testB",
-      lastName: "testB",
+      firstName: "TechTwo",
+      lastName: "GuyTwo",
       email: "test33333@example.com",
       phoneNumber: "1123",
       leaveBalance: 0,
